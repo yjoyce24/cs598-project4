@@ -48,15 +48,17 @@ def create_star_rating(Title, MovieID):
     stars = st_star_rating(label, amount_of_stars, default_value, size, emoticons, read_only, dark_theme,
                            resetButton=True, resetLabel="reset",
                                customCSS=customcss, on_click=function_to_run_on_click)
-    # st.write(stars)
 
 
 i = 0
 
-for col in st.columns(5) + st.columns(5) + st.columns(5) + st.columns(5) + st.columns(5) + \
-           st.columns(5) + st.columns(5) + st.columns(5) + st.columns(5) + st.columns(5) + \
-           st.columns(5) + st.columns(5) + st.columns(5) + st.columns(5) + st.columns(5) + \
-           st.columns(5) + st.columns(5) + st.columns(5) + st.columns(5) + st.columns(5):
+# for col in st.columns(5) + st.columns(5) + st.columns(5) + st.columns(5) + st.columns(5) + \
+#            st.columns(5) + st.columns(5) + st.columns(5) + st.columns(5) + st.columns(5) + \
+#            st.columns(5) + st.columns(5) + st.columns(5) + st.columns(5) + st.columns(5) + \
+#            st.columns(5) + st.columns(5) + st.columns(5) + st.columns(5) + st.columns(5):
+
+for col in st.columns(10) + st.columns(10) + st.columns(10) + st.columns(10) + st.columns(10) + \
+           st.columns(10) + st.columns(10) + st.columns(10) + st.columns(10) + st.columns(10):
     if i < n_movies:
         with col.container(height=375, border=False):
             m_id = int(movies100["MovieID"].iloc[i])
