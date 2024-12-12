@@ -56,7 +56,7 @@ for col in st.columns(10) + st.columns(10) + st.columns(10) + st.columns(10) + s
     if i <= 100:
         with col.container(height = 450):
             img = Image.open("MovieImages/" + str(i) + ".jpg")
-            img.thumbnail(128, 128, Image.LANCZOS)
+            img.thumbnail([128, 128], Image.LANCZOS)
             st.write(img)
             movie_title = movies[movies["MovieID"] == i]["Title"].values[0]
             create_star_rating(movie_title, i)
