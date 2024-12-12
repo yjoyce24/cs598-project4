@@ -5,17 +5,7 @@ import pandas as pd
 import numpy as np
 import os
 
-n_movies = 50
-
-# # MovieImage_numbers = os.listdir("MovieImages")
-# MovieImage_numbers = [int(n.replace(".jpg", "")) for n in os.listdir("MovieImages")]
-#
-# movies = pd.read_csv("data/movies.dat",
-#                      sep='::', engine = 'python',
-#                      encoding="ISO-8859-1", header = None)
-# movies.columns = ['MovieID', 'Title', 'Genres']
-#
-# movies100 = movies[movies["MovieID"].isin(np.random.choice(MovieImage_numbers, n_movies, replace=False))]
+n_movies = 100
 
 movies100 = pd.read_csv("data/movie_subset.csv")
 
@@ -51,7 +41,7 @@ def create_star_rating(Title, MovieID):
                                customCSS=customcss, on_click=function_to_run_on_click)
 
 
-rate_movies_exp = st.expander("Rate Movies", expanded=True)
+rate_movies_exp = st.expander("<b>Add Movie Ratings</b>", expanded=True)
 
 with rate_movies_exp.container(height = 400):
     i = 0
