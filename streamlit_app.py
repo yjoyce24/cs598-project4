@@ -71,17 +71,30 @@ st.write(user_ratings)
 def myIBCF(rated_movies):
     ## for now, output ids of 10 movies
     rated_movies_df = pd.DataFrame.from_dict(rated_movies, orient="index", columns=["rating"])
+
     # return list of rated movies
     return list(rated_movies_df[rated_movies_df["rating"] > 0].index)
     # return np.random.choice(list(rated_movies.keys()), 10, replace=False)
 
 def get_recs(rated_movies):
     movie_recs = myIBCF(rated_movies)
-    st.write(movie_recs)
-    # show_recs(movie_recs)
+    # st.write(movie_recs)
+    show_recs(movie_recs)
 
-# def show_recs(recs):
-#     st.write(list(recs.astype(int)))
+def show_recs(rec_ids):
+    i = 0
+    for col in st.columns(10):
+        if i < len(rec_ids):
+            with col.container(height = 400):
+                m_id = rec_ids[i]
+                img = Image.open("MovieImages/" + str(m_id) + ".jpg")
+                img.thumbnail([200, 200], Image.LANCZOS)
+                st.write(img)
+                movie_title = movies100[movies100["MovieID"] == m_id]["Title"].values[0]
+                st.write(movie_title)
+            i += 1
+
+    # st.write(list(recs.astype(int)))
 
 # st.button("fake button")
 
