@@ -88,7 +88,7 @@ def show_recs(rec_ids):
     i = 0
     for col in st.columns(10):
         if i < len(rec_ids):
-            with col.container(height = 300, border = False):
+            with col.container(height = 400, border = False):
                 m_id = rec_ids[i]
                 img = Image.open("MovieImages/" + str(m_id) + ".jpg")
                 img.thumbnail([200, 200], Image.LANCZOS)
