@@ -53,7 +53,10 @@ def create_star_rating(Title, MovieID):
 
 i = 0
 
-for col in st.columns(10) + st.columns(10) + st.columns(10) + st.columns(10) + st.columns(10) + st.columns(10) + st.columns(10) + st.columns(10) + st.columns(10) + st.columns(10):
+for col in st.columns(5) + st.columns(5) + st.columns(5) + st.columns(5) + st.columns(5) + \
+           st.columns(5) + st.columns(5) + st.columns(5) + st.columns(5) + st.columns(5) + \
+           st.columns(5) + st.columns(5) + st.columns(5) + st.columns(5) + st.columns(5) + \
+           st.columns(5) + st.columns(5) + st.columns(5) + st.columns(5) + st.columns(5):
     if i < n_movies:
         with col.container(height=350):
             m_id = int(movies100["MovieID"].iloc[i])
