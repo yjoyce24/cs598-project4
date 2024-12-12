@@ -85,6 +85,4 @@ if st.button(label = "Get Recommendations!"):
         # st.write(recs_to_show)
         # st.write("user_ratings.keys()")
         # st.write(list(user_ratings.keys()))
-        # st.write("user_ratings")
-        # st.write(user_ratings)
 
