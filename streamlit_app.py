@@ -33,7 +33,7 @@ def create_star_rating(Title, MovieID):
     label = Title
     amount_of_stars = 5
     default_value = 0
-    size = 20
+    size = 15
     emoticons = False
     read_only = False
     dark_theme = False
