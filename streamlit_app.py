@@ -70,7 +70,7 @@ st.write(user_ratings)
 
 def myIBCF(rated_movies):
     ## for now, output ids of 10 movies
-    rated_movies_df = pd.DataFrame.from_dict(rated_movies, orient="index", columns="rating")
+    rated_movies_df = pd.DataFrame.from_dict(rated_movies, orient="index", columns=["rating"])
     # return list of rated movies
     return list(rated_movies_df[rated_movies_df["rating"] > 0].index)
     # return np.random.choice(list(rated_movies.keys()), 10, replace=False)
