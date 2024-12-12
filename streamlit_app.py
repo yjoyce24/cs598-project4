@@ -50,26 +50,27 @@ def create_star_rating(Title, MovieID):
                                customCSS=customcss, on_click=function_to_run_on_click)
 
 
-i = 0
+with st.container():
+    i = 0
 
-# for col in st.columns(5) + st.columns(5) + st.columns(5) + st.columns(5) + st.columns(5) + \
-#            st.columns(5) + st.columns(5) + st.columns(5) + st.columns(5) + st.columns(5) + \
-#            st.columns(5) + st.columns(5) + st.columns(5) + st.columns(5) + st.columns(5) + \
-#            st.columns(5) + st.columns(5) + st.columns(5) + st.columns(5) + st.columns(5):
+    # for col in st.columns(5) + st.columns(5) + st.columns(5) + st.columns(5) + st.columns(5) + \
+    #            st.columns(5) + st.columns(5) + st.columns(5) + st.columns(5) + st.columns(5) + \
+    #            st.columns(5) + st.columns(5) + st.columns(5) + st.columns(5) + st.columns(5) + \
+    #            st.columns(5) + st.columns(5) + st.columns(5) + st.columns(5) + st.columns(5):
 
-for col in st.columns(10) + st.columns(10) + st.columns(10) + st.columns(10) + st.columns(10) + \
-           st.columns(10) + st.columns(10) + st.columns(10) + st.columns(10) + st.columns(10):
-    if i < n_movies:
-        with col.container(height=375, border=False):
-            m_id = int(movies100["MovieID"].iloc[i])
+    for col in st.columns(10) + st.columns(10) + st.columns(10) + st.columns(10) + st.columns(10) + \
+               st.columns(10) + st.columns(10) + st.columns(10) + st.columns(10) + st.columns(10):
+        if i < n_movies:
+            with col.container(height=375, border=False):
+                m_id = int(movies100["MovieID"].iloc[i])
 
-            img = Image.open("MovieImages/" + str(m_id) + ".jpg")
-            img.thumbnail([200, 200], Image.LANCZOS)
-            st.write(img)
-            movie_title = movies100[movies100["MovieID"] == m_id]["Title"].values[0]
-            create_star_rating(movie_title, m_id)
+                img = Image.open("MovieImages/" + str(m_id) + ".jpg")
+                img.thumbnail([200, 200], Image.LANCZOS)
+                st.write(img)
+                movie_title = movies100[movies100["MovieID"] == m_id]["Title"].values[0]
+                create_star_rating(movie_title, m_id)
 
-        i += 1
+            i += 1
 
 # st.write(user_ratings)
 
