@@ -1,6 +1,8 @@
 import streamlit as st
 from streamlit_star_rating import st_star_rating
 from PIL import Image
+import pandas as pd
+import numpy as np
 
 movies = pd.read_csv("data/movies.dat",
                      sep='::', engine = 'python',
