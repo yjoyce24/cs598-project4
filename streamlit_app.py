@@ -1,5 +1,6 @@
 import streamlit as st
 from streamlit_star_rating import st_star_rating
+from PIL import Image
 
 st.set_page_config(layout="wide")
 
@@ -32,7 +33,8 @@ def create_star_rating(movie):
     st.write(stars)
 
 for i in range(1,6):
-    st.write("MovieImages/" + str(i) + ".jpg")
+    img = Image.open("MovieImages/" + str(i) + ".jpg")
+    st.write(img)
     create_star_rating("m" + str(i))
 
 
