@@ -94,9 +94,7 @@ def show_recs(rec_ids):
                 st.write(movie_title)
             i += 1
 
-    # st.write(list(recs.astype(int)))
 
-# st.button("fake button")
 
 if st.button(label = "Get Recommendations!"):
     with st.container():
