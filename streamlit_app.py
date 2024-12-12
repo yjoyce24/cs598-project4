@@ -24,7 +24,7 @@ user_ratings = dict()
 
 def create_star_rating(Title, MovieID):
 
-    label = Title
+    label = None
     amount_of_stars = 5
     default_value = 0
     size = 20
@@ -56,6 +56,7 @@ for col in st.columns(10) + st.columns(10) + st.columns(10) + st.columns(10) + s
             img = Image.open("MovieImages/" + str(i) + ".jpg")
             st.write(img)
             movie_title = movies[movies["MovieID"] == i]["Title"].values[0]
+            st.write(movie_title)
             create_star_rating(movie_title, i)
 
         i += 1
