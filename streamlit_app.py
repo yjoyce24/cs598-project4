@@ -78,7 +78,7 @@ def myIBCF(rated_movies):
 
 def get_recs(rated_movies):
     movie_recs = myIBCF(rated_movies)
-    if len(movie_recs == 0):
+    if len(movie_recs) == 0:
         st.write("You have not rated any movies")
     else:
         st.write("Recommended for you:")
