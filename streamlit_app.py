@@ -2,6 +2,13 @@ import streamlit as st
 from streamlit_star_rating import st_star_rating
 from PIL import Image
 
+movies = pd.read_csv("data/movies.dat",
+                     sep='::', engine = 'python',
+                     encoding="ISO-8859-1", header = None)
+movies.columns = ['MovieID', 'Title', 'Genres']
+
+movies100 = movies.iloc[np.random.choice(range(movies.shape[0], 100, replace=False))]
+
 st.set_page_config(layout="wide")
 
 st.title("Movie Recommendations 🎥")
@@ -35,6 +42,8 @@ def create_star_rating(movie):
 for i in range(1,6):
     img = Image.open("MovieImages/" + str(i) + ".jpg")
     st.write(img)
+    movie_title = movies100[movies100["MovieID"] == i]
+    st.write(movie_title)
     create_star_rating("m" + str(i))
 
 
