@@ -13,7 +13,6 @@ movies = pd.read_csv("data/movies.dat",
                      encoding="ISO-8859-1", header = None)
 movies.columns = ['MovieID', 'Title', 'Genres']
 
-# movies100 = movies.iloc[np.random.choice(MovieImage_numbers, 100, replace=False)]
 movies100 = movies[movies["MovieID"].isin(np.random.choice(MovieImage_numbers, 100, replace=False))]
 
 st.set_page_config(layout="wide")
@@ -38,7 +37,7 @@ def create_star_rating(Title, MovieID):
     dark_theme = False
     reset_btn = True
 
-    customcss = "h3 { font-size = 12pt; } "
+    customcss = "h3 { font-size: 4px; }"
 
     def function_to_run_on_click(value):
         user_ratings.update({MovieID: value})
@@ -52,46 +51,27 @@ def create_star_rating(Title, MovieID):
 
 i = 0
 
-
-# allrows = exec(" + ".join(np.repeat("st.columns(5)", 20)))
-
-
 for col in st.columns(10) + st.columns(10) + st.columns(10) + st.columns(10) + st.columns(10) + st.columns(10) + st.columns(10) + st.columns(10) + st.columns(10) + st.columns(10):
-
     if i < 100:
-        with col.container(height = 450):
-            id = int(movies100["MovieID"].iloc[i])
+        with col.container(height=450):
+            m_id = int(movies100["MovieID"].iloc[i])
 
-            img = Image.open("MovieImages/" + str(id) + ".jpg")
+            img = Image.open("MovieImages/" + str(m_id) + ".jpg")
             img.thumbnail([200, 200], Image.LANCZOS)
             st.write(img)
-            movie_title = movies[movies["MovieID"] == id]["Title"].values[0]
-            create_star_rating(movie_title, id)
+            movie_title = movies[movies["MovieID"] == m_id]["Title"].values[0]
+            create_star_rating(movie_title, m_id)
 
         i += 1
 
-
-#
-# row1 = st.columns(10)
-# row2 = st.columns(10)
-# row3 = st.columns(10)
-# row4 = st.columns(10)
-# row5 = st.columns(10)
-# row6 = st.columns(10)
-# row7 = st.columns(10)
-# row8 = st.columns(10)
-# row9 = st.columns(10)
-# row10 = st.columns(10)
-#
-# i = 1
-# for col in row1 + row2 + row3 + row4 + row5 + row6 + row7 + row8 + row9 + row10:
-#     with st.container(height=120):
-#         img = Image.open("MovieImages/" + str(i) + ".jpg")
-#         st.write(img)
-#         movie_title = movies[movies["MovieID"] == i]["Title"].values[0]
-#         create_star_rating(movie_title, i)
-#         i += 1
-
-
 st.write(user_ratings)
 
+def myIBCF(rated_movies):
+    ## for now, output ids of 10 movies
+    return np.random.choice(rated_movies.keys(), 10, replace=False)
+
+def get_recs():
+    movie_recs = myIBCF(user_ratings)
+
+if st.button(label = "Get Recommendations!", on_click = get_recs):
+    st.switch_page("recs_page.py")
