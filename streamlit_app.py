@@ -61,7 +61,7 @@ with st.container(height = 500):
     for col in st.columns(10) + st.columns(10) + st.columns(10) + st.columns(10) + st.columns(10) + \
                st.columns(10) + st.columns(10) + st.columns(10) + st.columns(10) + st.columns(10):
         if i < n_movies:
-            with col.container(height=375, border=False):
+            with col.container(height=325, border=False):
                 m_id = int(movies100["MovieID"].iloc[i])
 
                 img = Image.open("MovieImages/" + str(m_id) + ".jpg")
