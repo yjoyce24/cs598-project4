@@ -1,3 +1,4 @@
 streamlit
 st-star-rating
-
+pandas
+numpy
