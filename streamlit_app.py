@@ -5,7 +5,7 @@ import pandas as pd
 import numpy as np
 import os
 
-n_movies = 100
+n_movies = 10
 
 # MovieImage_numbers = os.listdir("MovieImages")
 MovieImage_numbers = [int(n.replace(".jpg", "")) for n in os.listdir("MovieImages")]
@@ -37,7 +37,7 @@ def create_star_rating(Title, MovieID):
     dark_theme = False
     reset_btn = True
 
-    customcss = "h3 { font-size: 4px; }"
+    customcss = "h3 { font-size: 16px; }"
 
     def function_to_run_on_click(value):
         user_ratings.update({MovieID: value})
