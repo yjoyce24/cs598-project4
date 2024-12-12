@@ -1,6 +1,8 @@
 import streamlit as st
 from streamlit_star_rating import st_star_rating
 
+st.set_page_config(layout="wide")
+
 st.title("🎈Testing out streamlit")
 st.write(
     "Let's start building! For help and inspiration, head over to [docs.streamlit.io](https://docs.streamlit.io/)."
@@ -29,8 +31,8 @@ def create_star_rating(movie):
                                customCSS="", on_click=function_to_run_on_click)
     st.write(stars)
 
-create_star_rating("m10")
-create_star_rating("m20")
+for i in range(5):
+    create_star_rating("m" + str(i))
 
 st.write(user_ratings)
 
