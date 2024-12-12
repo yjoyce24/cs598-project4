@@ -49,7 +49,7 @@ for col in st.columns([1,1,1,1,1]) + st.columns([1,1,1,1,1]):
     # tile.title(":balloon:")
 
     if i < 11:
-        with st.container(height = 500):
+        with col.container(height = 500):
             img = Image.open("MovieImages/" + str(i) + ".jpg")
             st.write(img)
             movie_title = movies[movies["MovieID"] == i]["Title"].values[0]
