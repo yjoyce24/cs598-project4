@@ -51,11 +51,9 @@ def create_star_rating(Title, MovieID):
                                customCSS=customcss, on_click=function_to_run_on_click)
 
 
-expand_step1 = True
+rate_movies_exp = st.expander("Rate Movies", expanded=True)
 
-step1 = st.expander("Step 1: Rate Movies", expanded=expand_step1)
-
-with step1.container(height = 400):
+with rate_movies_exp.container(height = 400):
     i = 0
 
     for col in st.columns(5) + st.columns(5) + st.columns(5) + st.columns(5) + st.columns(5) + \
@@ -109,10 +107,8 @@ def show_recs(rec_ids):
                 st.write(movie_title)
             i += 1
 
-def shrink_step1():
-    expand_step1 = False
 
-if st.button(label = "Get Recommendations!", type = "primary", on_click = shrink_step1):
+if st.button(label = "Get Recommendations!", type = "primary" ):
     with st.container():
 
         # st.write("these are your recommendations:")
