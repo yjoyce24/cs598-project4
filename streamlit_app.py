@@ -5,6 +5,8 @@ import pandas as pd
 import numpy as np
 import os
 
+n_movies = 100
+
 # MovieImage_numbers = os.listdir("MovieImages")
 MovieImage_numbers = [int(n.replace(".jpg", "")) for n in os.listdir("MovieImages")]
 
@@ -13,7 +15,7 @@ movies = pd.read_csv("data/movies.dat",
                      encoding="ISO-8859-1", header = None)
 movies.columns = ['MovieID', 'Title', 'Genres']
 
-movies100 = movies[movies["MovieID"].isin(np.random.choice(MovieImage_numbers, 100, replace=False))]
+movies100 = movies[movies["MovieID"].isin(np.random.choice(MovieImage_numbers, n_movies, replace=False))]
 
 st.set_page_config(layout="wide")
 
@@ -50,7 +52,7 @@ def create_star_rating(Title, MovieID):
 i = 0
 
 for col in st.columns(10) + st.columns(10) + st.columns(10) + st.columns(10) + st.columns(10) + st.columns(10) + st.columns(10) + st.columns(10) + st.columns(10) + st.columns(10):
-    if i < 100:
+    if i < n_movies:
         with col.container(height=450):
             m_id = int(movies100["MovieID"].iloc[i])
 
@@ -71,7 +73,9 @@ def myIBCF(rated_movies):
 def get_recs():
     movie_recs = myIBCF(user_ratings)
 
-st.button("fake button")
+# st.button("fake button")
 
-if st.button(label = "Get Recommendations!", on_click = get_recs):
-    st.switch_page("pages/recs_page.py")
+if st.button(label = "Get Recommendations!"):
+    with st.container():
+        recs_to_show = get_recs()
+        st.write(recs_to_show)
