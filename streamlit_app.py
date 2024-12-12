@@ -32,7 +32,7 @@ def create_star_rating(movie):
     st.write(stars)
 
 for i in range(1,6):
-    st.write("MovieImages/" + i + ".jpg")
+    st.write("MovieImages/" + str(i) + ".jpg")
     create_star_rating("m" + str(i))
 
 
