@@ -80,6 +80,7 @@ def get_recs(rated_movies):
     movie_recs = myIBCF(rated_movies)
     st.write("movie_recs")
     st.write(movie_recs)
+    st.write(len(movie_recs))
 
     # if len(movie_recs) == 0:
     #     st.write("You have not rated any movies")
