@@ -61,6 +61,7 @@ for col in row1 + row2 + row3 + row4 + row5 + row6 + row7 + row8 + row9 + row10:
         st.write(img)
         movie_title = movies[movies["MovieID"] == i]["Title"].values[0]
         create_star_rating(movie_title, i)
+        i += 1
 
 
 st.write(user_ratings)
