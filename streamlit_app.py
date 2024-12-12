@@ -66,7 +66,7 @@ for col in st.columns(10) + st.columns(10) + st.columns(10) + st.columns(10) + s
 
 def myIBCF(rated_movies):
     ## for now, output ids of 10 movies
-    return np.random.choice(rated_movies.keys(), 10, replace=False)
+    return np.random.choice(list(rated_movies.keys()), 10, replace=False)
 
 def get_recs():
     movie_recs = myIBCF(user_ratings)
