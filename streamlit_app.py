@@ -42,7 +42,7 @@ def create_star_rating(Title, MovieID):
     customcss = "h3 { font-size: 16px; }"
 
     def function_to_run_on_click(value):
-        user_ratings.update({MovieID: value})
+        user_ratings.update({int(MovieID): value})
         # st.write(f"**{value}** stars!")
 
     stars = st_star_rating(label, amount_of_stars, default_value, size, emoticons, read_only, dark_theme,
