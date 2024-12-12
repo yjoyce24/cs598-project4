@@ -3,13 +3,17 @@ from streamlit_star_rating import st_star_rating
 from PIL import Image
 import pandas as pd
 import numpy as np
+import os
+
+# MovieImage_numbers = os.listdir("MovieImages")
+MovieImage_numbers = [int(n.replace(".jpg", "")) for n in os.listdir("MovieImages")]
 
 movies = pd.read_csv("data/movies.dat",
                      sep='::', engine = 'python',
                      encoding="ISO-8859-1", header = None)
 movies.columns = ['MovieID', 'Title', 'Genres']
 
-movies100 = movies.iloc[np.random.choice(range(movies.shape[0]), 100, replace=False)]
+movies100 = movies.iloc[np.random.choice(MovieImage_numbers, 100, replace=False)]
 
 st.set_page_config(layout="wide")
 
@@ -56,6 +60,7 @@ for col in st.columns(10) + st.columns(10) + st.columns(10) + st.columns(10) + s
     if i < 100:
         with col.container(height = 450):
             id = int(movies100["MovieID"].iloc[i])
+
             img = Image.open("MovieImages/" + str(id) + ".jpg")
             img.thumbnail([200, 200], Image.LANCZOS)
             st.write(img)
