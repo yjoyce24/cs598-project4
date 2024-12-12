@@ -23,7 +23,7 @@ st.set_page_config(layout="wide")
 
 st.title("Movie Recommendations 🎥")
 st.write(
-    "Rate the movies below to get a list of movie recommendations."
+    "After rating the movies below, click \"Get Recommendations\" at the bottom of this page to display movies recommended for you."
 )
 
 user_ratings = dict()
