@@ -43,13 +43,13 @@ def create_star_rating(Title, MovieID):
     st.write(stars)
 
 
-for row in st.columns(10):
-    for i in range(1,11):
+for col in st.columns(10):
+    for i in range(1, 11):
         img = Image.open("MovieImages/" + str(i) + ".jpg")
         st.write(img)
         movie_title = movies[movies["MovieID"] == i]["Title"].values[0]
         create_star_rating(movie_title, i)
-        
+
 
 #
 # row1 = st.columns(10)
