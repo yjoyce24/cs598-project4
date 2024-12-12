@@ -9,7 +9,7 @@ movies = pd.read_csv("data/movies.dat",
                      encoding="ISO-8859-1", header = None)
 movies.columns = ['MovieID', 'Title', 'Genres']
 
-movies100 = movies.iloc[np.random.choice(range(movies.shape[0], 100, replace=False))]
+movies100 = movies.iloc[np.random.choice(range(movies.shape[0]), 100, replace=False)]
 
 st.set_page_config(layout="wide")
 
