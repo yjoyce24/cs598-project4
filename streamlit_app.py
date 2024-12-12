@@ -74,4 +74,4 @@ def get_recs():
 st.button("fake button")
 
 if st.button(label = "Get Recommendations!", on_click = get_recs):
-    st.switch_page("recs_page.py")
+    st.switch_page("pages/recs_page.py")
