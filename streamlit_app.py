@@ -55,7 +55,7 @@ for col in st.columns(10) + st.columns(10) + st.columns(10) + st.columns(10) + s
 
     if i < 100:
         with col.container(height = 450):
-            id = movies100["MovieID"].iloc[i]
+            id = int(movies100["MovieID"].iloc[i])
             img = Image.open("MovieImages/" + str(id) + ".jpg")
             img.thumbnail([200, 200], Image.LANCZOS)
             st.write(img)
