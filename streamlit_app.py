@@ -66,17 +66,17 @@ for col in st.columns(10) + st.columns(10) + st.columns(10) + st.columns(10) + s
 
 st.write(user_ratings)
 
-def myIBCF(rated_movies):
-    ## for now, output ids of 10 movies
-    return np.random.choice(list(rated_movies.keys()), 10, replace=False)
-
-def get_recs():
-    movie_recs = myIBCF(user_ratings)
-
-# st.button("fake button")
-
-if st.button(label = "Get Recommendations!"):
-    with st.container():
-        recs_to_show = get_recs()
-        st.write(recs_to_show)
-        st.write("these are your recommendations")
+# def myIBCF(rated_movies):
+#     ## for now, output ids of 10 movies
+#     return np.random.choice(list(rated_movies.keys()), 10, replace=False)
+#
+# def get_recs():
+#     movie_recs = myIBCF(user_ratings)
+#
+# # st.button("fake button")
+#
+# if st.button(label = "Get Recommendations!"):
+#     with st.container():
+#         recs_to_show = get_recs()
+#         st.write(recs_to_show)
+#         st.write("these are your recommendations")
