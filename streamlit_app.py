@@ -5,7 +5,7 @@ import pandas as pd
 import numpy as np
 import os
 
-n_movies = 10
+n_movies = 50
 
 # # MovieImage_numbers = os.listdir("MovieImages")
 # MovieImage_numbers = [int(n.replace(".jpg", "")) for n in os.listdir("MovieImages")]
@@ -39,7 +39,7 @@ def create_star_rating(Title, MovieID):
     dark_theme = False
     reset_btn = True
 
-    customcss = "h3 { font-size: 12px; }"
+    customcss = "h3 { font-size: 14px; }"
 
     def function_to_run_on_click(value):
         user_ratings.update({int(MovieID): value})
@@ -55,7 +55,7 @@ i = 0
 
 for col in st.columns(10) + st.columns(10) + st.columns(10) + st.columns(10) + st.columns(10) + st.columns(10) + st.columns(10) + st.columns(10) + st.columns(10) + st.columns(10):
     if i < n_movies:
-        with col.container(height=400):
+        with col.container(height=350):
             m_id = int(movies100["MovieID"].iloc[i])
 
             img = Image.open("MovieImages/" + str(m_id) + ".jpg")
@@ -81,7 +81,7 @@ def show_recs(rec_ids):
     i = 0
     for col in st.columns(10):
         if i < len(rec_ids):
-            with col.container(height = 400):
+            with col.container(height = 300):
                 m_id = rec_ids[i]
                 img = Image.open("MovieImages/" + str(m_id) + ".jpg")
                 img.thumbnail([200, 200], Image.LANCZOS)
