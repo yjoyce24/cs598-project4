@@ -33,13 +33,14 @@ def create_star_rating(Title, MovieID):
     label = Title
     amount_of_stars = 5
     default_value = 0
-    size = 15
+    size = 20
     emoticons = False
     read_only = False
     dark_theme = False
     reset_btn = True
 
-    customcss = "h3 { font-size: 14px; }"
+    customcss = "h3 { font-size: 14px; } " \
+                "[data-baseweb=\"button\"] {padding: 3px 3px; border-radius: 5px; font-size: 10px;}"
 
     def function_to_run_on_click(value):
         user_ratings.update({int(MovieID): value})
