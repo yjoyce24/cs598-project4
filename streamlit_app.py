@@ -78,7 +78,11 @@ def myIBCF(rated_movies):
 
 def get_recs(rated_movies):
     movie_recs = myIBCF(rated_movies)
-    show_recs(movie_recs)
+    if len(movie_recs == 0):
+        st.write("You have not rated any movies")
+    else:
+        st.write("Recommended for you:")
+        show_recs(movie_recs)
 
 def show_recs(rec_ids):
     i = 0
@@ -97,7 +101,8 @@ def show_recs(rec_ids):
 
 if st.button(label = "Get Recommendations!", type = "primary"):
     with st.container():
-        st.write("these are your recommendations:")
+
+        # st.write("these are your recommendations:")
         get_recs(user_ratings)
         # st.write(recs_to_show)
         # st.write("user_ratings.keys()")
