@@ -1,2 +1,2 @@
 streamlit
-streamlit_star_rating
+st-star-rating
