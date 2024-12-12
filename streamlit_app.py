@@ -79,6 +79,9 @@ def get_recs():
 
 if st.button(label = "Get Recommendations!"):
     with st.container():
+        st.write("these are your recommendations:")
         recs_to_show = get_recs()
         st.write(recs_to_show)
-        st.write("these are your recommendations")
+        st.write("user_ratings.keys()")
+        st.write(list(user_ratings.keys()))
+
