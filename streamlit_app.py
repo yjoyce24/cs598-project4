@@ -23,7 +23,7 @@ st.set_page_config(layout="wide")
 
 st.title("Movie Recommendations 🎥")
 st.write(
-    "Rate each movie below to get a list of movie recommendations."
+    "Rate the movies below to get a list of movie recommendations."
 )
 
 user_ratings = dict()
@@ -48,7 +48,7 @@ def create_star_rating(Title, MovieID):
     stars = st_star_rating(label, amount_of_stars, default_value, size, emoticons, read_only, dark_theme,
                            resetButton=True, resetLabel="reset",
                                customCSS=customcss, on_click=function_to_run_on_click)
-    st.write(stars)
+    # st.write(stars)
 
 
 i = 0
