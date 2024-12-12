@@ -46,10 +46,10 @@ def create_star_rating(Title, MovieID):
 i = 1
 
 
-exec(" + ".join(np.repeat("st.columns(5)", 20)))
+# exec(" + ".join(np.repeat("st.columns(5)", 20)))
 
 
-for col in exec(" + ".join(np.repeat("st.columns(5)", 20))):
+for col in exec("st.columns(5) + st.columns(5)"):
 
     if i <= 100:
         with col.container(height = 450):
