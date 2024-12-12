@@ -33,7 +33,7 @@ def create_star_rating(Title, MovieID):
     dark_theme = False
     reset_btn = True
 
-    customcss = 'h2 { font-size = 16px }'
+    customcss = 'h3 { font-size = 16px }'
 
     def function_to_run_on_click(value):
         user_ratings.update({MovieID: value})
