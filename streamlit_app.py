@@ -53,7 +53,7 @@ i = 0
 
 for col in st.columns(10) + st.columns(10) + st.columns(10) + st.columns(10) + st.columns(10) + st.columns(10) + st.columns(10) + st.columns(10) + st.columns(10) + st.columns(10):
     if i < n_movies:
-        with col.container(height=450):
+        with col.container(height=400):
             m_id = int(movies100["MovieID"].iloc[i])
 
             img = Image.open("MovieImages/" + str(m_id) + ".jpg")
@@ -64,7 +64,7 @@ for col in st.columns(10) + st.columns(10) + st.columns(10) + st.columns(10) + s
 
         i += 1
 
-# st.write(user_ratings)
+st.write(user_ratings)
 
 def myIBCF(rated_movies):
     ## for now, output ids of 10 movies
