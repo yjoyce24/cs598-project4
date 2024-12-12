@@ -39,7 +39,7 @@ def create_star_rating(Title, MovieID):
     dark_theme = False
     reset_btn = True
 
-    customcss = "h3 { font-size: 16px; }"
+    customcss = "h3 { font-size: 12px; }"
 
     def function_to_run_on_click(value):
         user_ratings.update({int(MovieID): value})
@@ -66,19 +66,15 @@ for col in st.columns(10) + st.columns(10) + st.columns(10) + st.columns(10) + s
 
         i += 1
 
-st.write(user_ratings)
+# st.write(user_ratings)
 
 def myIBCF(rated_movies):
-    ## for now, output ids of 10 movies
+    ## for now, return list of movies with any user selected rating
     rated_movies_df = pd.DataFrame.from_dict(rated_movies, orient="index", columns=["rating"])
-
-    # return list of rated movies
     return list(rated_movies_df[rated_movies_df["rating"] > 0].index)
-    # return np.random.choice(list(rated_movies.keys()), 10, replace=False)
 
 def get_recs(rated_movies):
     movie_recs = myIBCF(rated_movies)
-    # st.write(movie_recs)
     show_recs(movie_recs)
 
 def show_recs(rec_ids):
