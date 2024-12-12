@@ -23,7 +23,7 @@ st.set_page_config(layout="wide")
 
 st.title("Movie Recommendations 🎥")
 st.write(
-    "After rating the movies below, click \"Get Recommendations\" at the bottom of this page to display movies recommended for you."
+    "After rating the movies below, click \"Get Recommendations\" to display movies recommended for you. Scroll to see all movies."
 )
 
 user_ratings = dict()
@@ -50,7 +50,7 @@ def create_star_rating(Title, MovieID):
                                customCSS=customcss, on_click=function_to_run_on_click)
 
 
-with st.container(height = 800):
+with st.container(height = 500):
     i = 0
 
     # for col in st.columns(5) + st.columns(5) + st.columns(5) + st.columns(5) + st.columns(5) + \
