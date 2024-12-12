@@ -55,12 +55,12 @@ row10 = st.columns(10)
 
 i = 1
 for col in row1 + row2 + row3 + row4 + row5 + row6 + row7 + row8 + row9 + row10:
-
-    img = Image.open("MovieImages/" + str(i) + ".jpg")
-    st.write(img)
-    movie_title = movies[movies["MovieID"] == i]["Title"].values[0]
-    create_star_rating(movie_title, i)
-    i += 1
+    with st.container(height=120):
+        img = Image.open("MovieImages/" + str(i) + ".jpg")
+        st.write(img)
+        movie_title = movies[movies["MovieID"] == i]["Title"].values[0]
+        create_star_rating(movie_title, i)
+        i += 1
 
 
 st.write(user_ratings)
