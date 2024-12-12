@@ -72,16 +72,18 @@ def myIBCF(rated_movies):
     ## for now, output ids of 10 movies
     return np.random.choice(list(rated_movies.keys()), 10, replace=False)
 
-def get_recs():
-    movie_recs = myIBCF(user_ratings)
+def get_recs(rated_movies):
+    movie_recs = myIBCF(rated_movies)
 
 # st.button("fake button")
 
 if st.button(label = "Get Recommendations!"):
     with st.container():
         st.write("these are your recommendations:")
-        recs_to_show = get_recs()
+        recs_to_show = get_recs(user_ratings)
         st.write(recs_to_show)
         st.write("user_ratings.keys()")
         st.write(list(user_ratings.keys()))
+        st.write("user_ratings")
+        st.write(user_ratings)
 
