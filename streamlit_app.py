@@ -33,7 +33,7 @@ def create_star_rating(Title, MovieID):
     dark_theme = False
     reset_btn = True
 
-    customcss = "h3 { font-size = 12px; color:red; } "
+    customcss = "h3 { font-size = 12pt; } "
 
     def function_to_run_on_click(value):
         user_ratings.update({MovieID: value})
@@ -55,11 +55,12 @@ for col in st.columns(10) + st.columns(10) + st.columns(10) + st.columns(10) + s
 
     if i <= 100:
         with col.container(height = 450):
-            img = Image.open("MovieImages/" + str(i) + ".jpg")
+            id = movies100["MovieID"].iloc[i]
+            img = Image.open("MovieImages/" + str(id) + ".jpg")
             img.thumbnail([200, 200], Image.LANCZOS)
             st.write(img)
-            movie_title = movies[movies["MovieID"] == i]["Title"].values[0]
-            create_star_rating(movie_title, i)
+            movie_title = movies[movies["MovieID"] == id]["Title"].values[0]
+            create_star_rating(movie_title, id)
 
         i += 1
 
