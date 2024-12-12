@@ -7,15 +7,17 @@ import os
 
 n_movies = 10
 
-# MovieImage_numbers = os.listdir("MovieImages")
-MovieImage_numbers = [int(n.replace(".jpg", "")) for n in os.listdir("MovieImages")]
+# # MovieImage_numbers = os.listdir("MovieImages")
+# MovieImage_numbers = [int(n.replace(".jpg", "")) for n in os.listdir("MovieImages")]
+#
+# movies = pd.read_csv("data/movies.dat",
+#                      sep='::', engine = 'python',
+#                      encoding="ISO-8859-1", header = None)
+# movies.columns = ['MovieID', 'Title', 'Genres']
+#
+# movies100 = movies[movies["MovieID"].isin(np.random.choice(MovieImage_numbers, n_movies, replace=False))]
 
-movies = pd.read_csv("data/movies.dat",
-                     sep='::', engine = 'python',
-                     encoding="ISO-8859-1", header = None)
-movies.columns = ['MovieID', 'Title', 'Genres']
-
-movies100 = movies[movies["MovieID"].isin(np.random.choice(MovieImage_numbers, n_movies, replace=False))]
+movies100 = pd.read_csv("data/movie_subset.csv")
 
 st.set_page_config(layout="wide")
 
@@ -59,24 +61,24 @@ for col in st.columns(10) + st.columns(10) + st.columns(10) + st.columns(10) + s
             img = Image.open("MovieImages/" + str(m_id) + ".jpg")
             img.thumbnail([200, 200], Image.LANCZOS)
             st.write(img)
-            movie_title = movies[movies["MovieID"] == m_id]["Title"].values[0]
+            movie_title = movies100[movies100["MovieID"] == m_id]["Title"].values[0]
             create_star_rating(movie_title, m_id)
 
         i += 1
 
 st.write(user_ratings)
 
-# def myIBCF(rated_movies):
-#     ## for now, output ids of 10 movies
-#     return np.random.choice(list(rated_movies.keys()), 10, replace=False)
-#
-# def get_recs():
-#     movie_recs = myIBCF(user_ratings)
-#
+def myIBCF(rated_movies):
+    ## for now, output ids of 10 movies
+    return np.random.choice(list(rated_movies.keys()), 10, replace=False)
+
+def get_recs():
+    movie_recs = myIBCF(user_ratings)
+
 # st.button("fake button")
-#
-# if st.button(label = "Get Recommendations!"):
-#     with st.container():
-#         recs_to_show = get_recs()
-#         st.write(recs_to_show)
-#         st.write("these are your recommendations")
+
+if st.button(label = "Get Recommendations!"):
+    with st.container():
+        recs_to_show = get_recs()
+        st.write(recs_to_show)
+        st.write("these are your recommendations")
