@@ -58,7 +58,7 @@ for col in st.columns(5) + st.columns(5) + st.columns(5) + st.columns(5) + st.co
            st.columns(5) + st.columns(5) + st.columns(5) + st.columns(5) + st.columns(5) + \
            st.columns(5) + st.columns(5) + st.columns(5) + st.columns(5) + st.columns(5):
     if i < n_movies:
-        with col.container(height=375):
+        with col.container(height=375, border=False):
             m_id = int(movies100["MovieID"].iloc[i])
 
             img = Image.open("MovieImages/" + str(m_id) + ".jpg")
@@ -92,7 +92,7 @@ def show_recs(rec_ids):
     i = 0
     for col in st.columns(10):
         if i < len(rec_ids):
-            with col.container(height = 250):
+            with col.container(height = 250, border = False):
                 m_id = rec_ids[i]
                 img = Image.open("MovieImages/" + str(m_id) + ".jpg")
                 img.thumbnail([200, 200], Image.LANCZOS)
