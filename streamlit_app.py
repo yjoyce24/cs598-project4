@@ -44,11 +44,12 @@ def create_star_rating(Title, MovieID):
 
 
 i = 1
-rows = []
-for r in range(20):
-    rows.append(st.columns(5))
 
-for col in map(lambda x, y: x + y, rows):
+
+exec(" + ".join(np.repeat("st.columns(5)", 20)))
+
+
+for col in exec(" + ".join(np.repeat("st.columns(5)", 20))):
 
     if i <= 100:
         with col.container(height = 450):
