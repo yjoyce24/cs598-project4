@@ -42,25 +42,35 @@ def create_star_rating(Title, MovieID):
                                customCSS="", on_click=function_to_run_on_click)
     st.write(stars)
 
-row1 = st.columns(10)
-row2 = st.columns(10)
-row3 = st.columns(10)
-row4 = st.columns(10)
-row5 = st.columns(10)
-row6 = st.columns(10)
-row7 = st.columns(10)
-row8 = st.columns(10)
-row9 = st.columns(10)
-row10 = st.columns(10)
 
-i = 1
-for col in row1 + row2 + row3 + row4 + row5 + row6 + row7 + row8 + row9 + row10:
-    with st.container(height=120):
+for row in st.columns(10):
+    for i in range(1,11):
         img = Image.open("MovieImages/" + str(i) + ".jpg")
         st.write(img)
         movie_title = movies[movies["MovieID"] == i]["Title"].values[0]
         create_star_rating(movie_title, i)
-        i += 1
+        
+
+#
+# row1 = st.columns(10)
+# row2 = st.columns(10)
+# row3 = st.columns(10)
+# row4 = st.columns(10)
+# row5 = st.columns(10)
+# row6 = st.columns(10)
+# row7 = st.columns(10)
+# row8 = st.columns(10)
+# row9 = st.columns(10)
+# row10 = st.columns(10)
+#
+# i = 1
+# for col in row1 + row2 + row3 + row4 + row5 + row6 + row7 + row8 + row9 + row10:
+#     with st.container(height=120):
+#         img = Image.open("MovieImages/" + str(i) + ".jpg")
+#         st.write(img)
+#         movie_title = movies[movies["MovieID"] == i]["Title"].values[0]
+#         create_star_rating(movie_title, i)
+#         i += 1
 
 
 st.write(user_ratings)
