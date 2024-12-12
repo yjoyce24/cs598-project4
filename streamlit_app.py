@@ -24,8 +24,6 @@ st.write(
 
 user_ratings = dict()
 
-
-
 def create_star_rating(Title, MovieID):
 
     label = Title
@@ -64,7 +62,7 @@ for col in st.columns(10) + st.columns(10) + st.columns(10) + st.columns(10) + s
 
         i += 1
 
-st.write(user_ratings)
+# st.write(user_ratings)
 
 def myIBCF(rated_movies):
     ## for now, output ids of 10 movies
@@ -72,6 +70,8 @@ def myIBCF(rated_movies):
 
 def get_recs():
     movie_recs = myIBCF(user_ratings)
+
+st.button("fake button")
 
 if st.button(label = "Get Recommendations!", on_click = get_recs):
     st.switch_page("recs_page.py")
