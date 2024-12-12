@@ -24,7 +24,7 @@ user_ratings = dict()
 
 def create_star_rating(Title, MovieID):
 
-    label = ""
+    label = Title
     amount_of_stars = 5
     default_value = 0
     size = 20
@@ -33,13 +33,15 @@ def create_star_rating(Title, MovieID):
     dark_theme = False
     reset_btn = True
 
+    customcss = 'h1 { font-size = 16px }'
+
     def function_to_run_on_click(value):
         user_ratings.update({MovieID: value})
         # st.write(f"**{value}** stars!")
 
     stars = st_star_rating(label, amount_of_stars, default_value, size, emoticons, read_only, dark_theme,
                            resetButton=False, resetLabel="",
-                               customCSS="", on_click=function_to_run_on_click)
+                               customCSS=customcss, on_click=function_to_run_on_click)
     st.write(stars)
 
 
@@ -56,7 +58,6 @@ for col in st.columns(10) + st.columns(10) + st.columns(10) + st.columns(10) + s
             img = Image.open("MovieImages/" + str(i) + ".jpg")
             st.write(img)
             movie_title = movies[movies["MovieID"] == i]["Title"].values[0]
-            st.write(movie_title)
             create_star_rating(movie_title, i)
 
         i += 1
