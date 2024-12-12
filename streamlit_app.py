@@ -46,7 +46,7 @@ def create_star_rating(Title, MovieID):
         # st.write(f"**{value}** stars!")
 
     stars = st_star_rating(label, amount_of_stars, default_value, size, emoticons, read_only, dark_theme,
-                           resetButton=False, resetLabel="",
+                           resetButton=True, resetLabel="",
                                customCSS=customcss, on_click=function_to_run_on_click)
     st.write(stars)
 
