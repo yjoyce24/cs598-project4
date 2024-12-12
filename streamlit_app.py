@@ -44,7 +44,7 @@ def create_star_rating(movie):
 for i in range(1,6):
     img = Image.open("MovieImages/" + str(i) + ".jpg")
     st.write(img)
-    movie_title = movies100[movies100["MovieID"] == i]
+    movie_title = movies[movies["MovieID"] == i]["Title"].values[0]
     st.write(movie_title)
     create_star_rating("m" + str(i))
 
