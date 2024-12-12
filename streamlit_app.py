@@ -46,7 +46,7 @@ def create_star_rating(Title, MovieID):
         # st.write(f"**{value}** stars!")
 
     stars = st_star_rating(label, amount_of_stars, default_value, size, emoticons, read_only, dark_theme,
-                           resetButton=True, resetLabel="reset rating",
+                           resetButton=True, resetLabel="reset",
                                customCSS=customcss, on_click=function_to_run_on_click)
     st.write(stars)
 
@@ -58,7 +58,7 @@ for col in st.columns(5) + st.columns(5) + st.columns(5) + st.columns(5) + st.co
            st.columns(5) + st.columns(5) + st.columns(5) + st.columns(5) + st.columns(5) + \
            st.columns(5) + st.columns(5) + st.columns(5) + st.columns(5) + st.columns(5):
     if i < n_movies:
-        with col.container(height=350):
+        with col.container(height=375):
             m_id = int(movies100["MovieID"].iloc[i])
 
             img = Image.open("MovieImages/" + str(m_id) + ".jpg")
@@ -84,7 +84,7 @@ def show_recs(rec_ids):
     i = 0
     for col in st.columns(10):
         if i < len(rec_ids):
-            with col.container(height = 300):
+            with col.container(height = 250):
                 m_id = rec_ids[i]
                 img = Image.open("MovieImages/" + str(m_id) + ".jpg")
                 img.thumbnail([200, 200], Image.LANCZOS)
