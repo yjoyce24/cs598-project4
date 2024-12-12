@@ -45,7 +45,7 @@ def create_star_rating(Title, MovieID):
     st.write(stars)
 
 
-i = 1
+i = 0
 
 
 # allrows = exec(" + ".join(np.repeat("st.columns(5)", 20)))
@@ -53,7 +53,7 @@ i = 1
 
 for col in st.columns(10) + st.columns(10) + st.columns(10) + st.columns(10) + st.columns(10) + st.columns(10) + st.columns(10) + st.columns(10) + st.columns(10) + st.columns(10):
 
-    if i <= 100:
+    if i < 100:
         with col.container(height = 450):
             id = movies100["MovieID"].iloc[i]
             img = Image.open("MovieImages/" + str(id) + ".jpg")
