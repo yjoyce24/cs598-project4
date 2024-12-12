@@ -40,8 +40,7 @@ def create_star_rating(Title, MovieID):
     reset_btn = True
 
     customcss = "h3 { font-size: 14px; } " \
-                "[data-baseweb=\"button\"] {padding: 2px 5px; border-radius: 5px; font-size: 10px; background-color: #7B7B7B;}" \
-                "[data-baseweb=\"button\"]:active { background-color: #7B7B7B;}"
+                "[data-baseweb=\"button\"] {padding: 2px 5px; border-radius: 5px; font-size: 10px;}"
 
     def function_to_run_on_click(value):
         user_ratings.update({int(MovieID): value})
