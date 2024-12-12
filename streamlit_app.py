@@ -95,7 +95,7 @@ def show_recs(rec_ids):
 
 
 
-if st.button(label = "Get Recommendations!"):
+if st.button(label = "Get Recommendations!", type = "primary"):
     with st.container():
         st.write("these are your recommendations:")
         get_recs(user_ratings)
