@@ -73,7 +73,7 @@ def myIBCF(rated_movies):
 def get_recs():
     movie_recs = myIBCF(user_ratings)
 
-# st.button("fake button")
+st.button("fake button")
 
 if st.button(label = "Get Recommendations!"):
     with st.container():
