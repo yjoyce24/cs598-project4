@@ -43,7 +43,7 @@ def create_star_rating(Title, MovieID):
 
 rate_movies_exp = st.expander(rf"""**Add Movie Ratings**""", expanded=True)
 
-with rate_movies_exp.container(height = 400):
+with rate_movies_exp.container(height = 410):
     i = 0
 
     for col in st.columns(5) + st.columns(5) + st.columns(5) + st.columns(5) + st.columns(5) + \
@@ -54,7 +54,7 @@ with rate_movies_exp.container(height = 400):
     # for col in st.columns(10) + st.columns(10) + st.columns(10) + st.columns(10) + st.columns(10) + \
     #            st.columns(10) + st.columns(10) + st.columns(10) + st.columns(10) + st.columns(10):
         if i < n_movies:
-            with col.container(height=325, border=False):
+            with col.container(height=350, border=False):
                 m_id = int(movies100["MovieID"].iloc[i])
 
                 img = Image.open("MovieImages/" + str(m_id) + ".jpg")
@@ -88,7 +88,7 @@ def show_recs(rec_ids):
     i = 0
     for col in st.columns(10):
         if i < len(rec_ids):
-            with col.container(height = 250, border = False):
+            with col.container(height = 300, border = False):
                 m_id = rec_ids[i]
                 img = Image.open("MovieImages/" + str(m_id) + ".jpg")
                 img.thumbnail([200, 200], Image.LANCZOS)
