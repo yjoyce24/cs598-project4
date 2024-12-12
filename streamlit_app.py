@@ -50,7 +50,7 @@ def create_star_rating(Title, MovieID):
                                customCSS=customcss, on_click=function_to_run_on_click)
 
 
-with st.container(height = 1500):
+with st.container(height = 800):
     i = 0
 
     # for col in st.columns(5) + st.columns(5) + st.columns(5) + st.columns(5) + st.columns(5) + \
