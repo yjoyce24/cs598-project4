@@ -57,9 +57,6 @@ with rate_movies_exp.container(height = 450):
                st.columns(5) + st.columns(5) + st.columns(5) + st.columns(5) + st.columns(5) + \
                st.columns(5) + st.columns(5) + st.columns(5) + st.columns(5) + st.columns(5) + \
                st.columns(5) + st.columns(5) + st.columns(5) + st.columns(5) + st.columns(5):
-
-    # for col in st.columns(10) + st.columns(10) + st.columns(10) + st.columns(10) + st.columns(10) + \
-    #            st.columns(10) + st.columns(10) + st.columns(10) + st.columns(10) + st.columns(10):
         if m < n_movies:
             with col.container(height=375, border=False):
                 m_id = int(movies100["MovieID"].iloc[m])
@@ -96,8 +93,10 @@ def myIBCF(new_user_ratings, similarity_matrix):
     return top_10_movies
 
 def get_recs(rated_movies):
+    rated_movies_df = pd.DataFrame.from_dict(rated_movies, orient="index", columns=["rating"])
+    rated_movies_list = list(rated_movies_df[rated_movies_df["rating"] > 0].index)
 
-    if len(rated_movies) == 0:
+    if len(rated_movies_list) == 0:
         st.write("You have not rated any movies")
     else:
         ratings = np.full(len(Rmat100_cols), np.nan)
