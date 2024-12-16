@@ -69,7 +69,7 @@ with rate_movies_exp.container(height = 450):
 
             m += 1
 
-# st.write(user_ratings_dict)
+st.write(user_ratings_dict)
 
 
 def myIBCF(new_user_ratings, similarity_matrix):
@@ -104,9 +104,10 @@ def get_recs(rated_movies):
 
         for k in rated_movies.keys():
             idx = np.where(np.isin(Rmat100_cols, [k]))[0]
+            st.write(idx)
             ratings[idx] = rated_movies.get(k)
 
-        st.write(ratings)
+        # st.write(ratings)
         movie_recs = myIBCF(ratings, Smat)
         movie_rec_ids = [int(mID.replace("m", "")) for mID in movie_recs]
         st.write("Recommended for you:")
