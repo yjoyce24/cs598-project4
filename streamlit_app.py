@@ -74,11 +74,6 @@ with rate_movies_exp.container(height = 450):
 
 # st.write(user_ratings_dict)
 
-def myIBCF(rated_movies):
-    ## for now, return list of movies with any user selected rating
-    rated_movies_df = pd.DataFrame.from_dict(rated_movies, orient="index", columns=["rating"])
-    return list(rated_movies_df[rated_movies_df["rating"] > 0].index)
-
 
 def myIBCF(new_user_ratings, similarity_matrix):
     predicted_ratings = np.full_like(new_user_ratings,0,dtype=float)
@@ -101,18 +96,18 @@ def myIBCF(new_user_ratings, similarity_matrix):
     return top_10_movies
 
 def get_recs(rated_movies):
-    ratings = np.full(len(Rmat100_cols), np.nan)
-
-    for k in rated_movies.keys():
-        idx = np.where(np.isin(Rmat100_cols, [k]))[0]
-        ratings[idx] = rated_movies.get(k)
-
-    movie_recs = myIBCF(ratings, Smat)
-    movie_rec_ids = [int(mID.replace("m", "")) for mID in movie_recs]
 
     if len(rated_movies) == 0:
         st.write("You have not rated any movies")
     else:
+        ratings = np.full(len(Rmat100_cols), np.nan)
+
+        for k in rated_movies.keys():
+            idx = np.where(np.isin(Rmat100_cols, [k]))[0]
+            ratings[idx] = rated_movies.get(k)
+
+        movie_recs = myIBCF(ratings, Smat)
+        movie_rec_ids = [int(mID.replace("m", "")) for mID in movie_recs]
         st.write("Recommended for you:")
         show_recs(movie_rec_ids)
 
