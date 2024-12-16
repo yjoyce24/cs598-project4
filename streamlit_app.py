@@ -90,6 +90,7 @@ def myIBCF(new_user_ratings, similarity_matrix):
     top_10_values = np.sort(predicted_ratings)[::-1][:10]
     top_10_movie_ID = np.argsort(predicted_ratings)[::-1][:10]
     top_10_movies = [Rmat100_cols[i] for i in top_10_movie_ID]
+    st.write(top_10_movies)
     return top_10_movies
 
 def get_recs(rated_movies):
