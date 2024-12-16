@@ -87,6 +87,7 @@ def myIBCF(new_user_ratings, similarity_matrix):
             predicted_ratings[i] = num/den
     non_nan_mask = ~np.isnan(new_user_ratings)
     predicted_ratings[non_nan_mask] = 0
+    st.write(predicted_ratings)
     top_10_values = np.sort(predicted_ratings)[::-1][:10]
     top_10_movie_ID = np.argsort(predicted_ratings)[::-1][:10]
     top_10_movies = [Rmat100_cols[i] for i in top_10_movie_ID]
@@ -107,7 +108,7 @@ def get_recs(rated_movies):
             # st.write(idx)
             ratings[idx] = rated_movies.get(k)
 
-        st.write(ratings)
+        # st.write(ratings)
         movie_recs = myIBCF(ratings, Smat)
         movie_rec_ids = [int(mID.replace("m", "")) for mID in movie_recs]
         st.write("Recommended for you:")
