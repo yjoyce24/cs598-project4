@@ -72,7 +72,7 @@ with rate_movies_exp.container(height = 450):
 
             m += 1
 
-st.write(user_ratings_dict)
+# st.write(user_ratings_dict)
 
 def myIBCF(rated_movies):
     ## for now, return list of movies with any user selected rating
