@@ -7,7 +7,15 @@ import os
 
 n_movies = 100
 
-movies100 = pd.read_csv("data/movie_subset.csv")
+# read in subset of movies.dat (top 100 most popular movies out of those with images)
+movies100 = pd.read_csv("data/movies100.csv")
+
+# read in Rmat for the movies in movies100
+Rmat100 = pd.read_csv("data/Rmat100.csv", index_col=0)
+Rmat100_cols = Rmat100.columns
+
+# read in top 30 similarity matrix for movies in movies100
+Smat = pd.read_csv("data/top_30_S_matrix.csv")
 
 st.set_page_config(layout="wide")
 
@@ -16,10 +24,9 @@ st.write(
     "After rating the movies below, click \"Get Recommendations\" to display movies recommended for you. Scroll to see all movies."
 )
 
-user_ratings = dict()
+user_ratings_dict = dict()
 
 def create_star_rating(Title, MovieID):
-
     label = Title
     amount_of_stars = 5
     default_value = 0
@@ -33,7 +40,7 @@ def create_star_rating(Title, MovieID):
                 "[data-baseweb=\"button\"] {padding: 2px 5px; border-radius: 5px; font-size: 10px;}"
 
     def function_to_run_on_click(value):
-        user_ratings.update({int(MovieID): value})
+        user_ratings_dict.update({int(MovieID): value})
         # st.write(f"**{value}** stars!")
 
     stars = st_star_rating(label, amount_of_stars, default_value, size, emoticons, read_only, dark_theme,
@@ -44,7 +51,7 @@ def create_star_rating(Title, MovieID):
 rate_movies_exp = st.expander(rf"""**Add Movie Ratings**""", expanded=True)
 
 with rate_movies_exp.container(height = 450):
-    i = 0
+    m = 0
 
     for col in st.columns(5) + st.columns(5) + st.columns(5) + st.columns(5) + st.columns(5) + \
                st.columns(5) + st.columns(5) + st.columns(5) + st.columns(5) + st.columns(5) + \
@@ -53,9 +60,9 @@ with rate_movies_exp.container(height = 450):
 
     # for col in st.columns(10) + st.columns(10) + st.columns(10) + st.columns(10) + st.columns(10) + \
     #            st.columns(10) + st.columns(10) + st.columns(10) + st.columns(10) + st.columns(10):
-        if i < n_movies:
+        if m < n_movies:
             with col.container(height=375, border=False):
-                m_id = int(movies100["MovieID"].iloc[i])
+                m_id = int(movies100["MovieID"].iloc[m])
 
                 img = Image.open("MovieImages/" + str(m_id) + ".jpg")
                 img.thumbnail([200, 200], Image.LANCZOS)
@@ -63,26 +70,51 @@ with rate_movies_exp.container(height = 450):
                 movie_title = movies100[movies100["MovieID"] == m_id]["Title"].values[0]
                 create_star_rating(movie_title, m_id)
 
-            i += 1
+            m += 1
 
-# st.write(user_ratings)
+# st.write(user_ratings_dict)
 
 def myIBCF(rated_movies):
     ## for now, return list of movies with any user selected rating
     rated_movies_df = pd.DataFrame.from_dict(rated_movies, orient="index", columns=["rating"])
     return list(rated_movies_df[rated_movies_df["rating"] > 0].index)
 
-def get_recs(rated_movies):
-    movie_recs = myIBCF(rated_movies)
-    # st.write("movie_recs")
-    # st.write(movie_recs)
-    # st.write(len(movie_recs))
 
-    if len(movie_recs) == 0:
+def myIBCF(new_user_ratings, similarity_matrix):
+    predicted_ratings = np.full_like(new_user_ratings,0,dtype=float)
+    for i in range(similarity_matrix.shape[0]):
+        similarity = similarity_matrix[i, :]
+        common_mask = ~np.isnan(new_user_ratings) & ~np.isnan(similarity)
+        similarity = similarity[common_mask]
+        ratings = new_user_ratings[common_mask]
+        num = np.dot(similarity,ratings)
+        den = np.sum(similarity)
+        if den == 0:
+            predicted_ratings[i] = 0
+        else:
+            predicted_ratings[i] = num/den
+    non_nan_mask = ~np.isnan(new_user_ratings)
+    predicted_ratings[non_nan_mask] = 0
+    top_10_values = np.sort(predicted_ratings)[::-1][:10]
+    top_10_movie_ID = np.argsort(predicted_ratings)[::-1][:10]
+    top_10_movies = [Rmat100_cols[i] for i in top_10_movie_ID]
+    return top_10_movies
+
+def get_recs(rated_movies):
+    ratings = np.full(len(Rmat100_cols), np.nan)
+
+    for k in rated_movies.keys():
+        idx = np.where(np.isin(Rmat100_cols, [k]))[0]
+        ratings[idx] = rated_movies.get(k)
+
+    movie_recs = myIBCF(ratings, Smat)
+    movie_rec_ids = [int(mID.replace("m", "")) for mID in movie_recs]
+
+    if len(rated_movies) == 0:
         st.write("You have not rated any movies")
     else:
         st.write("Recommended for you:")
-        show_recs(movie_recs)
+        show_recs(movie_rec_ids)
 
 def show_recs(rec_ids):
     i = 0
@@ -97,13 +129,12 @@ def show_recs(rec_ids):
                 st.write(movie_title)
             i += 1
 
-
 if st.button(label = "Get Recommendations!", type = "primary" ):
     with st.container():
 
         # st.write("these are your recommendations:")
-        get_recs(user_ratings)
+        get_recs(user_ratings_dict)
         # st.write(recs_to_show)
-        # st.write("user_ratings.keys()")
-        # st.write(list(user_ratings.keys()))
+        # st.write("user_ratings_dict.keys()")
+        # st.write(list(user_ratings_dict.keys()))
 
