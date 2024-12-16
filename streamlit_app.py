@@ -90,7 +90,7 @@ def myIBCF(new_user_ratings, similarity_matrix):
     top_10_values = np.sort(predicted_ratings)[::-1][:10]
     top_10_movie_ID = np.argsort(predicted_ratings)[::-1][:10]
     top_10_movies = [Rmat100_cols[i] for i in top_10_movie_ID]
-    st.write(top_10_movies)
+    # st.write(top_10_movies) # print out for debugging
     return top_10_movies
 
 def get_recs(rated_movies):
@@ -106,6 +106,7 @@ def get_recs(rated_movies):
             idx = np.where(np.isin(Rmat100_cols, [k]))[0]
             ratings[idx] = rated_movies.get(k)
 
+        st.write(ratings)
         movie_recs = myIBCF(ratings, Smat)
         movie_rec_ids = [int(mID.replace("m", "")) for mID in movie_recs]
         st.write("Recommended for you:")
@@ -126,10 +127,5 @@ def show_recs(rec_ids):
 
 if st.button(label = "Get Recommendations!", type = "primary" ):
     with st.container():
-
-        # st.write("these are your recommendations:")
         get_recs(user_ratings_dict)
-        # st.write(recs_to_show)
-        # st.write("user_ratings_dict.keys()")
-        # st.write(list(user_ratings_dict.keys()))
 
