@@ -87,7 +87,7 @@ def myIBCF(new_user_ratings, similarity_matrix):
             predicted_ratings[i] = num/den
     non_nan_mask = ~np.isnan(new_user_ratings)
     predicted_ratings[non_nan_mask] = 0
-    st.write(predicted_ratings)
+    # st.write(predicted_ratings)
     top_10_values = np.sort(predicted_ratings)[::-1][:10]
     top_10_movie_ID = np.argsort(predicted_ratings)[::-1][:10]
     top_10_movies = [Rmat100_cols[i] for i in top_10_movie_ID]
