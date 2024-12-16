@@ -15,7 +15,7 @@ Rmat100 = pd.read_csv("data/Rmat100.csv", index_col=0)
 Rmat100_cols = Rmat100.columns
 
 # read in top 30 similarity matrix for movies in movies100
-Smat = pd.read_csv("data/top_30_S_matrix.csv")
+Smat = pd.read_csv("data/top_30_S_matrix.csv").to_numpy()
 
 st.set_page_config(layout="wide")
 
@@ -72,7 +72,7 @@ with rate_movies_exp.container(height = 450):
 
             m += 1
 
-# st.write(user_ratings_dict)
+st.write(user_ratings_dict)
 
 def myIBCF(rated_movies):
     ## for now, return list of movies with any user selected rating
