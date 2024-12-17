@@ -98,6 +98,8 @@ def myIBCF(new_user_ratings, similarity_matrix):
   not_nan = ~np.isnan(predicted_ratings)
   predicted_ratings1 = predicted_ratings[not_nan]
 
+  st.write(predicted_ratings1)
+
   if len(predicted_ratings1) < 10:
     m,id = mostpopular(Rmat100,10-len(predicted_ratings1))
     top_n_indices_in_sorted_non_nan = np.argsort(predicted_ratings1)[::-1][:10]
@@ -110,9 +112,7 @@ def myIBCF(new_user_ratings, similarity_matrix):
     top_10_movie_ID = np.where(not_nan)[0][top_10_indices_in_sorted_non_nan]
     top_10_movies = [movie_ids[i] for i in top_10_movie_ID]
     top_10_values = predicted_ratings1[top_10_indices_in_sorted_non_nan]
-    st.write("len(predicted_ratings1) < 10")
-    st.write(predicted_ratings1)
-      
+
   return top_10_movies, top_10_values
 
 def get_recs(rated_movies):
