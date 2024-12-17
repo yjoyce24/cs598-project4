@@ -98,8 +98,6 @@ def myIBCF(new_user_ratings, similarity_matrix):
   not_nan = ~np.isnan(predicted_ratings)
   predicted_ratings1 = predicted_ratings[not_nan]
 
-  st.write(len(non_nan_mask))
-  st.write(len(predicted_ratings1))
 
   if len(predicted_ratings1) < 10:
     m,id = mostpopular(Rmat100,10-len(predicted_ratings1))
