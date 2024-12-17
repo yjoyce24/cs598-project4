@@ -26,6 +26,14 @@ st.write(
 
 user_ratings_dict = dict()
 
+movie_ids = list(Rmat100.columns)
+
+def mostpopular(R_mat,n):
+  total_ratings = np.nansum(R_mat,axis=0)
+  top_n_indices = np.argsort(total_ratings)[::-1][:n]
+  top_n_movies = [movie_ids[i] for i in top_n_indices]
+  return top_n_movies,top_n_indices
+
 def create_star_rating(Title, MovieID):
     label = Title
     amount_of_stars = 5
@@ -91,15 +99,16 @@ def myIBCF(new_user_ratings, similarity_matrix):
   predicted_ratings1 = predicted_ratings[not_nan]
 
   if len(predicted_ratings1) < 10:
-    m,id = mostpopular(R_mat,10-len(top_10_values))
-    top_10_movie_ID = np.argsort(predicted_ratings1)[::-1] + id
-    top_10_movies = [movieID[i] for i in top_10_movie_ID]
-    top_10_values = np.array(top_10_values.tolist() + [0] * (10 - len(top_10_values)))
-    #return top_10_movies, top_10_values
+    m,id = mostpopular(Rmat100,10-len(predicted_ratings1))
+    top_n_indices_in_sorted_non_nan = np.argsort(predicted_ratings1)[::-1][:10]
+    top_n_movie_ID = np.where(not_nan)[0][top_n_indices_in_sorted_non_nan]
+    top_10_movie_ID = np.concatenate((top_n_movie_ID,id))
+    top_10_movies = [movie_ids[i] for i in top_10_movie_ID]
+    top_10_values = np.array(predicted_ratings1[top_n_indices_in_sorted_non_nan].tolist() + [0] * (10 - len(predicted_ratings1)))
   else:
     top_10_indices_in_sorted_non_nan = np.argsort(predicted_ratings1)[::-1][:10]
     top_10_movie_ID = np.where(not_nan)[0][top_10_indices_in_sorted_non_nan]
-    top_10_movies = [movieID[i] for i in top_10_movie_ID]
+    top_10_movies = [movie_ids[i] for i in top_10_movie_ID]
     top_10_values = predicted_ratings1[top_10_indices_in_sorted_non_nan]
 
   return top_10_movies, top_10_values
