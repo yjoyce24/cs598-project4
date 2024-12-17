@@ -119,7 +119,7 @@ def get_recs(rated_movies):
             ratings[idx] = rated_movies.get(k)
 
         # st.write(ratings)
-        movie_recs = myIBCF(ratings, Smat)
+        movie_recs, top_10_values = myIBCF(ratings, Smat)
         movie_rec_ids = [int(mID.replace("m", "")) for mID in movie_recs]
         st.write("Recommended for you:")
         show_recs(movie_rec_ids)
