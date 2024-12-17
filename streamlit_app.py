@@ -73,26 +73,36 @@ with rate_movies_exp.container(height = 450):
 
 
 def myIBCF(new_user_ratings, similarity_matrix):
-    predicted_ratings = np.full_like(new_user_ratings,0,dtype=float)
-    for i in range(similarity_matrix.shape[0]):
-        similarity = similarity_matrix[i, :]
-        common_mask = ~np.isnan(new_user_ratings) & ~np.isnan(similarity)
-        similarity = similarity[common_mask]
-        ratings = new_user_ratings[common_mask]
-        num = np.dot(similarity,ratings)
-        den = np.sum(similarity)
-        if den == 0:
-            predicted_ratings[i] = 0
-        else:
-            predicted_ratings[i] = num/den
-    non_nan_mask = ~np.isnan(new_user_ratings)
-    predicted_ratings[non_nan_mask] = 0
-    # st.write(predicted_ratings)
-    top_10_values = np.sort(predicted_ratings)[::-1][:10]
-    top_10_movie_ID = np.argsort(predicted_ratings)[::-1][:10]
-    top_10_movies = [Rmat100_cols[i] for i in top_10_movie_ID]
-    # st.write(top_10_movies) # print out for debugging
-    return top_10_movies
+  predicted_ratings = np.full_like(new_user_ratings,np.nan,dtype=float)
+  for i in range(similarity_matrix.shape[0]):
+    similarity = similarity_matrix[i, :]
+    common_mask = ~np.isnan(new_user_ratings) & ~np.isnan(similarity)
+    similarity = similarity[common_mask]
+    ratings = new_user_ratings[common_mask]
+    num = np.dot(similarity,ratings)
+    den = np.sum(similarity)
+    if den == 0:
+      predicted_ratings[i] = np.nan
+    else:
+      predicted_ratings[i] = num/den
+  non_nan_mask = ~np.isnan(new_user_ratings)
+  predicted_ratings[non_nan_mask] = np.nan
+  not_nan = ~np.isnan(predicted_ratings)
+  predicted_ratings1 = predicted_ratings[not_nan]
+
+  if len(predicted_ratings1) < 10:
+    m,id = mostpopular(R_mat,10-len(top_10_values))
+    top_10_movie_ID = np.argsort(predicted_ratings1)[::-1] + id
+    top_10_movies = [movieID[i] for i in top_10_movie_ID]
+    top_10_values = np.array(top_10_values.tolist() + [0] * (10 - len(top_10_values)))
+    #return top_10_movies, top_10_values
+  else:
+    top_10_indices_in_sorted_non_nan = np.argsort(predicted_ratings1)[::-1][:10]
+    top_10_movie_ID = np.where(not_nan)[0][top_10_indices_in_sorted_non_nan]
+    top_10_movies = [movieID[i] for i in top_10_movie_ID]
+    top_10_values = predicted_ratings1[top_10_indices_in_sorted_non_nan]
+
+  return top_10_movies, top_10_values
 
 def get_recs(rated_movies):
     rated_movies_df = pd.DataFrame.from_dict(rated_movies, orient="index", columns=["rating"])
